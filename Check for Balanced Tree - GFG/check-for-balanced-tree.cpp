@@ -113,6 +113,7 @@ class Solution{
         
         if(abs(l-r) > 1){
             val = 0;
+            return val;
         }
         return max(l,r);
     }
@@ -120,10 +121,7 @@ class Solution{
     {
         int val = 1;
         height(root, val);
-        if(val == 0){
-            return false;
-        }
-        return true;
+        return val;
     }
 };
 
