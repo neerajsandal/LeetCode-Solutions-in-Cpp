@@ -10,20 +10,31 @@
  * };
  */
 class Solution {
+    vector<int> v;
 public:
-    int sum(TreeNode* root, int curr){
+    void sum(TreeNode* root, int temp){
         if(root == NULL){
-            return 0;
+            return;
         }
-        curr = curr*10+root->val;
         if(root->left == NULL && root->right == NULL){
-            return curr;
+            temp = temp*10+root->val;
+            v.push_back(temp);
+            return;
         }
-        int l = sum(root->left, curr);
-        int r = sum(root->right, curr);
-        return l+r;
+        temp = temp*10+root->val;
+        if(root->left){
+            sum(root->left, temp);
+        }
+        if(root->right){
+            sum(root->right, temp);
+        }
     }
     int sumNumbers(TreeNode* root) {
-        return sum(root, 0);
+        sum(root,0);
+        int ans = 0;
+        for(int i = 0; i < v.size(); i++){
+            ans += v[i];
+        }
+        return ans;
     }
 };
