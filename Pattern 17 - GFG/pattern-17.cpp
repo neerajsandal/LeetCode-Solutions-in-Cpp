@@ -7,13 +7,13 @@ using namespace std;
 class Solution {
   public:
     void printTriangle(int n) {
-        for(int i = n; i >= 1; i--)
+        
+        for(int i = 0; i < n; i++)
         {
             int ascii = 64;
-            for(int j = 1; j <= n; j++)
+            for(int j = n-1; j >= 0; j--)
             {
-                if(i <= j)
-                {
+                if(j <= i){
                     ascii++;
                     cout << char(ascii);
                 }
@@ -21,13 +21,10 @@ class Solution {
                     cout << " ";
                 }
             }
-            for(int j = n-1; j >= 1; j--)
+            for(int j = 1; j <= i; j++)
             {
-                if(i <= j)
-                {
-                    ascii--;
-                    cout << char(ascii);
-                }
+                ascii--;
+                cout << char(ascii);
             }
             cout << endl;
         }
