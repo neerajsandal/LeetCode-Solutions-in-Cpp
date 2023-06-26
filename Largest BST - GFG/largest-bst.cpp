@@ -98,50 +98,55 @@ struct Node {
         left = right = NULL;
     }
 };*/
-class NodeValue{
+class info{
     public:
-    int maxNode, minNode, maxSize;
-    NodeValue()
-    {
-        this->maxNode = 0;
-        this->minNode = 0;
-        this->maxSize = 0;
-    }
-    NodeValue(int minNode, int maxNode, int maxSize)
-    {
-        this->maxNode = maxNode;
-        this->minNode = minNode;
-        this->maxSize = maxSize;
-    }
+    int maxi;
+    int mini;
+    bool isbst;
+    int size;
+    
+    // info(int maxi, int mini, bool isbst, int size)
+    // {
+    //     this->maxi = maxi;
+    //     this->mini = mini;
+    //     this->isbst = isbst;
+    //     this->size = size;
+    // }
 };
 class Solution{
     public:
-    NodeValue bst(Node *root)
+    info bst(Node *root, int &ans)
     {
-        if(!root){
-            return NodeValue(INT_MAX, INT_MIN, 0);
+        if(root == NULL){
+            return {INT_MIN, INT_MAX, true, 0};
         }
         
-        auto left = bst(root->left);
-        auto right = bst(root->right);
+        auto left = bst(root->left, ans);
+        auto right = bst(root->right, ans);
         
-        // left < root < right
-        
-        if(left.maxNode < root->data && root->data < right.minNode)
+        info node;
+        node.maxi = max(right.maxi, root->data);
+        node.mini = min(left.mini, root->data);
+        node.size = 1 + left.size + right.size;
+        if(left.isbst && right.isbst && left.maxi < root->data && root->data < right.mini)
         {
-            NodeValue temp;
-            temp.maxNode = max(root->data, right.maxNode);
-            temp.minNode = min(root->data, left.minNode);
-            temp.maxSize = left.maxSize + right.maxSize + 1;
-            return temp;
+            node.isbst = true;
         }
-        return NodeValue(INT_MIN, INT_MAX, max(left.maxSize, right.maxSize));
+        else{
+            node.isbst = false;
+        }
+        
+        if(node.isbst)
+        {
+            ans = max(ans, node.size);
+        }
+        return node;
     }
-    /*You are required to complete this method */
-    // Return the size of the largest sub-tree which is also a BST
     int largestBst(Node *root)
     {
-    	return bst(root).maxSize;
+    	int ans = 0;
+    	auto solve = bst(root, ans);
+    	return ans;
     }
 };
 
