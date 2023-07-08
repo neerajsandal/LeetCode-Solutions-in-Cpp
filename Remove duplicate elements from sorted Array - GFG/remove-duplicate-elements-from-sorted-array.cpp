@@ -12,17 +12,18 @@ class Solution{
 public:
     int remove_duplicate(int a[],int n){
         int i = 0, j = 0;
-        while(i < n+1)
+        while(i < n)
         {
-            if(a[i] == a[i+1]){
+            if(a[i] == a[j]){
                 i++;
             }
             else{
+                j++;
                 swap(a[i], a[j]);
-                i++; j++;
+                i++;
             }
         }
-        return j-1;
+        return j+1;
     }
 };
 
