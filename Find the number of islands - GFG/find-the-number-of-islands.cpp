@@ -29,7 +29,7 @@ class Solution {
                     if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && visited[nrow][ncol] == 0 && grid[nrow][ncol] == '1')
                     {
                         visited[nrow][ncol] = 1;
-                        bfs(nrow, ncol, visited, grid);
+                        q.push({nrow, ncol});
                     }
                 }
             }
