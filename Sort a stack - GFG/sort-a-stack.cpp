@@ -63,16 +63,12 @@ void insert(stack<int> &s, int num)
     insert(s, num);
     s.push(val);
 }
-void sorting(stack<int> &s)
+void SortedStack :: sort()
 {
-    if(s.empty()) return;
+   if(s.empty()) return;
    
    int val = s.top();
    s.pop();
-   sorting(s);
+   sort();
    insert(s, val);
-}
-void SortedStack :: sort()
-{
-   sorting(s);
 }
