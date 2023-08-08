@@ -13,33 +13,51 @@ class Solution
     //Function to find if there is a celebrity in the party or not.
     int celebrity(vector<vector<int> >& M, int n) 
     {
-        int val = 0;
+        // 1. push all the indexes into the stack
+        stack<int> st;
         for(int i = 0; i < n; i++)
         {
-            bool flag = true;
-            for(int j = 0; j < n; j++) // for col;
-            { 
-                if(M[i][j] != 0)
-                {
-                    flag = false;
-                }
+            st.push(i);
+        }
+        
+        while(st.size() > 1)
+        {
+            int a = st.top(); st.pop();
+            int b = st.top(); st.pop();
+            
+            
+            if(M[a][b] == 1){
+                st.push(b);
             }
-            if(flag){
-                val = i;
-                
-                for(int k = 0; k < n; k++) // for rows
-                {
-                    if(M[k][val] == 0 && val != k)
-                    {
-                        flag = false;
-                        break;
-                    }
-                }
-                
-                if(flag) return val;
+            else{
+                st.push(a);
             }
         }
-        return -1;
+        
+        if(st.empty()) return -1;
+        
+        // row check
+        bool rowcheck = true;
+        bool colcheck = true;
+        for(int i = 0; i < n; i++)
+        {
+            if(M[st.top()][i] != 0)
+            {
+                rowcheck = false;
+            }
+        }
+        
+        // colcheck
+        for(int i = 0; i < n; i++)
+        {
+            if(M[i][st.top()] != 1 && st.top() != i)
+            {
+                colcheck = false;
+            }
+        }
+
+        if (rowcheck && colcheck) return st.top();
+        else return -1;
     }
 };
 
