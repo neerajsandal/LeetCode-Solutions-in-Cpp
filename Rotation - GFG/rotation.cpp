@@ -15,9 +15,25 @@ public:
 	    while(low <= high)
 	    {
 	        int mid = low + (high-low)/2;
+	       
+	        if(arr[low] <= arr[high])
+	        {
+	            if(arr[low] < ans)
+	            {
+	                ans = arr[low];
+	                index = low;
+	            }
+	            break;
+	        }
 	        
-	        if(arr[lo])
-	        if(arr[low] <= arr[mid])
+	        else if(arr[low] == arr[mid] && arr[mid] == arr[high])
+	        {
+	            high--;
+	            low++;
+	            continue;
+	        }
+	        
+	        else if(arr[low] <= arr[mid])
 	        {
 	            if(arr[low] < ans)
 	            {
