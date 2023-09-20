@@ -44,6 +44,7 @@ class Solution
             if(M[st.top()][i] != 0)
             {
                 rowcheck = false;
+                break;
             }
         }
         
@@ -53,6 +54,7 @@ class Solution
             if(M[i][st.top()] != 1 && st.top() != i)
             {
                 colcheck = false;
+                break;
             }
         }
 
@@ -60,6 +62,7 @@ class Solution
         else return -1;
     }
 };
+
 
 //{ Driver Code Starts.
 
