@@ -11,23 +11,18 @@ class Solution{
     bool find3Numbers(int A[], int n, int X)
     {
         sort(A, A+n);
-        int i = 0;
         for(int i = 0; i < n; i++)
         {
-            int element = X-A[i];
-            int low = i+1, high = n-1;
-            
-            while(low < high)
-            {
-                if(A[low] + A[high] == element) 
-                    return true;
-                else if(A[low] + A[high] < element)
-                    low++;
-                else if(A[low] + A[high] > element)
-                    high--;
+            int low = i+1;
+            int high = n-1;
+            while(low < high){
+                int sum = A[low] + A[high] + A[i];
+                if(sum == X) return true;
+                else if(sum > X) high--;
+                else low++;
             }
         }
-        return false;
+        return 0;
     }
 
 };
