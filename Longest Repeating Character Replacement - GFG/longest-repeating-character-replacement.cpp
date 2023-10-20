@@ -6,24 +6,19 @@ using namespace std;
 class Solution {
   public:
     int characterReplacement(string S, int K) {
-        int ans = 0;
+        int n = S.size();
         int i = 0, j = 0;
-        unordered_map<char, int> map;
+        unordered_map<char, int> mp;
+        int maxi = 0, ans = 0;
         
-        int maxi = 0;
-        
-        while(j < S.size())
+        while(j < n)
         {
-            map[S[j]]++;
-            // find the maximum occurence of element in given window
-            maxi = max(maxi, map[S[j]]);
-            if((j-i+1) - maxi > K)
-            {
-                map[S[i]]--;
+            mp[S[j]]++;
+            maxi = max(maxi, mp[S[j]]);
+            if((j-i+1 - maxi) > K){
+                mp[S[i]]--;
                 i++;
             }
-            
-            //length of the largest similar sliding window
             ans = max(ans, j-i+1);
             j++;
         }
